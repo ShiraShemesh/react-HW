@@ -1,0 +1,226 @@
+
+:root {
+  /* Modern, bright palette with Indigo and Sky Blue */
+  --color-text-primary: #1A237E; /* Deep Indigo Blue */
+  --color-text-secondary: rgba(26,35,126,0.65); /* Soft Indigo secondary */
+  --color-background-base: #F5F7FA; /* Light, soft blue-grey background */
+  --color-accent: #42A5F5; /* Bright Sky Blue accent */
+  --radius-lg: 14px; /* Slightly larger, softer radius */
+  --shadow-dark: none; 
+  --shadow-inset: none; 
+  --book-width-max: 900px;
+  
+  font-family: 'Inter', 'Roboto', sans-serif;
+  line-height: 1.55;
+  font-weight: 400;
+
+  color: var(--color-text-primary);
+  background-color: var(--color-background-base);
+}
+
+/* Base elements */
+body {
+  background: var(--color-background-base);
+  padding: 2rem 1rem;
+}
+
+/* App Wrapper: Clean, unified panel */
+#root {
+  max-width: 1000px; 
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  
+  /* Soft, elevated look */
+  background: #ffffff; /* Inner panel is pure white for contrast */
+  box-shadow: 0 4px 12px rgba(26,35,126,0.06); /* Soft, subtle elevation */
+  border: 1px solid rgba(26,35,126,0.04);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.4rem; /* Slightly larger title */
+  margin: .4rem 0 2.2rem 0;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  font-weight: 800; /* Bolder title */
+}
+
+/* --- Input Field --- */
+input[type="text"] {
+  width: min(700px, 92%);
+  max-width: 700px;
+  padding: 1rem 1.1rem; /* Slightly more padding */
+  border-radius: 10px; /* Rounded input */
+  border: 1px solid rgba(26,35,126,0.1);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  transition: box-shadow .2s ease, border-color .15s ease;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(26,35,126,0.03); /* Subtle initial shadow */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-accent); /* Focus border color */
+  box-shadow: 0 0 0 3px rgba(66,165,245,0.15); /* Soft, bright focus ring */
+}
+
+/* --- Buttons: Unified and Interactive Look --- */
+button {
+  border-radius: 12px; /* Softly rounded buttons */
+  border: none;
+  padding: 0.7em 1.4em; 
+  font-size: 1rem;
+  font-weight: 700; /* Bolder text */
+  cursor: pointer;
+  transition: all .15s ease;
+  background: var(--color-accent);
+  color: #ffffff; /* White text on accent */
+  box-shadow: 0 3px 6px rgba(66,165,245,0.3); /* Accent shadow for lift */
+  margin: .8rem .5rem; /* More margin */
+}
+
+button:hover { 
+  opacity: .95; 
+  transform: translateY(-2px); 
+  box-shadow: 0 5px 10px rgba(66,165,245,0.4); 
+}
+button:active { 
+  transform: translateY(0); 
+  box-shadow: 0 3px 6px rgba(66,165,245,0.3);
+}
+button:disabled {
+  /* מראה את סמל האיסור (עיגול חסום) */
+  cursor: not-allowed; 
+  
+  /* מומלץ גם להוסיף סגנון ויזואלי המעיד על חוסר זמינות */
+  opacity: 0.6; /* מקטין שקיפות */
+  box-shadow: none; /* מסיר צלליות הרמה */
+}
+
+/* Primary Accent Button (e.g., "show books") */
+/* (Uses the styles defined above) */
+
+/* --- Book Card Component: Clean, Raised Look --- */
+
+@supports (selector(:has(*))) {
+  div:has(> h2) {
+    max-width: var(--book-width-max);
+    width: 95%;
+    margin: 1.5rem auto; /* More margin around cards */
+    padding: 1.4rem; /* More padding inside */
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+    
+    /* Soft elevation for card effect */
+    border: 1px solid rgba(26,35,126,0.08); 
+    box-shadow: 0 2px 8px rgba(26,35,126,0.05); 
+    transition: all .2s ease;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* hover: subtle lift and shadow increase */
+  div:has(> h2):hover {
+    border-color: rgba(66,165,245,0.3);
+    box-shadow: 0 6px 16px rgba(26,35,126,0.08);
+    transform: translateY(-1px);
+  }
+  
+  /* Content Area */
+  div:has(> h2) > :not(button) { 
+      flex-basis: 70%; 
+      max-width: 70%;
+      min-width: 250px;
+  }
+  
+  div:has(> h2) h2 {
+    font-size: 1.35rem; /* Slightly larger title */
+    color: var(--color-text-primary);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  div:has(> h2) p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem; /* Slightly larger secondary text */
+    margin: 0.1rem 0;
+  }
+
+  div:has(> h2) p:first-of-type {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  /* Secondary Card Button: Loan/Not Available */
+  div:has(> h2) button {
+    flex-basis: auto;
+    align-self: center;
+    margin: 0;
+    padding: .65rem 1.2rem; /* More padding */
+    font-size: 0.95rem;
+    font-weight: 600;
+    
+    /* Subtle look */
+    background: rgba(66,165,245,0.08); /* Very light blue background */
+    color: var(--color-text-primary); /* Darker text */
+    border: 1px solid rgba(66,165,245,0.2); 
+    box-shadow: none;
+  }
+  
+  div:has(> h2) button:hover {
+      background: rgba(66,165,245,0.15); /* Slightly darker hover */
+      transform: none; /* No vertical movement on secondary button */
+      box-shadow: none;
+  }
+  
+  /* Badge ("NEW BOOK!") - Clean and unified look */
+  p:has(> p[style*="NEW BOOK"]) {
+      /* Targeting the element wrapping the text "NEW BOOK!" */
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 1.2rem !important;
+      padding: .5rem 0 !important;
+      border-radius: 12px;
+      
+      /* Accent-based badge */
+      background: rgba(66,165,245,0.15); /* Light accent background */
+      border: none; 
+      color: var(--color-text-primary) !important; 
+      font-weight: 700;
+      font-size: 0.9rem;
+  }
+}
+
+div[style*="rgba(188, 104, 167)"] {
+  background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Media Queries (Responsive) */
+@media (max-width: 800px) {
+    /* (Keeping vertical collapse for responsiveness) */
+    div:has(> h2) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    div:has(> h2) > :not(button) {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    div:has(> h2) button {
+        margin-top: 1rem;
+        width: 100%;
+        align-self: stretch;
+    }
+}

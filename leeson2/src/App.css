@@ -1,0 +1,119 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Smooth collapsible (prevents page jump when showing/hiding) */
+.collapsible {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height .36s cubic-bezier(.2,.9,.3,1), opacity .28s ease, transform .28s ease;
+  pointer-events: none;
+}
+.collapsible.open {
+  max-height: 1200px; /* large enough to contain content */
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.collapsible > * {
+  /* keep internal spacing stable */
+  margin: .5rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsible,
+  .collapsible.open {
+    transition: none;
+  }
+}
+
+/* CSS-only approach to prevent page jump when Books/Auther mount/unmount:
+   1) Reserve vertical space under the main content so toggling doesn't shift layout.
+   2) Add entry animations for Books/Book elements for a smooth appearance.
+   Note: This keeps your JSX unchanged as requested. */
+#root::after {
+  content: "";
+  display: block;
+  height: 420px; /* reserve enough space for the list; adjust if needed */
+}
+
+@media (max-width: 520px) {
+  #root::after { height: 680px; }
+}
+
+/* Entry animation for Books heading */
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply to the Books h1 and book cards (works with previous index.css selectors) */
+h1 {
+  animation: slideFadeIn .34s ease;
+}
+
+/* For Book cards using :has() selector (modern browsers) */
+@supports (selector(:has(*))) {
+  div:has(> h2) {
+    animation: slideFadeIn .36s ease;
+  }
+}
+
+/* Fallback: target typical structure (h2 + p + p + p) */
+@supports not (selector(:has(*))) {
+  h2 + p + p + p {
+    animation: slideFadeIn .36s ease;
+  }
+}
+
+/* Reduce motion respecting user preferences */
+@media (prefers-reduced-motion: reduce) {
+  #root::after,
+  h1,
+  div:has(> h2),
+  h2 + p + p + p {
+    transition: none !important;
+    animation: none !important;
+  }
+}
