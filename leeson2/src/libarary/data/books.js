@@ -8,7 +8,7 @@ let books = [{ "id": 1, "name": "יוזבד","auther":"Maia Keinan", "NumberOfLo
   "id": 5,  "name": "הנורמלי האחרון","auther":"Ruti Kepler", "NumberOfLoan": 7, "PublicationDate": "2022-07-10", "AvailableForLoan": false
 }];
 
-export const getTasks = () => {
+export const getBooks = () => {
     return new Promise((resolve, reject) => {
         const num = Math.random() * 4;
         if (num >  4) {
@@ -16,11 +16,9 @@ export const getTasks = () => {
         } else {
             resolve([...books]);
         }
-        
     })
 }
-
-export const addNewTask = (b) => {
+export const addNewBook = (b) => {
     books.push(b);
     return Promise.resolve([...books]);
 }

@@ -224,3 +224,136 @@ div[style*="rgba(188, 104, 167)"] {
         align-self: stretch;
     }
 }
+
+/* ----------------------------
+   Forms: Add New Book (Books) and Update (Book)
+   Style both forms consistently and responsively (CSS-only)
+   ---------------------------- */
+
+/* Hide legacy <br> spacing to let CSS grid handle layout cleanly */
+#root form br,
+div:has(> h2) form br { display: none; }
+
+/* Add form (under Books) styling */
+#root > form {
+  max-width: var(--book-width-max);
+  width: 95%;
+  margin: 1.25rem auto;
+  padding: .9rem;
+  border-radius: 10px;
+  background: #fbfdff;
+  border: 1px solid rgba(11,57,65,0.04);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem .8rem;
+  align-items: center;
+}
+
+#root > form input[type="text"],
+#root > form input[type="number"],
+#root > form input[type="date"] {
+  padding: .6rem .85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(11,57,65,0.06);
+  background: #ffffff;
+  font-size: .95rem;
+  box-shadow: none;
+}
+
+#root > form input[type="checkbox"] {
+  transform: scale(1.15);
+  margin-left: .25rem;
+}
+
+#root > form button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: .6rem 1rem;
+  border-radius: 10px;
+}
+
+/* Update form inside each Book card (smaller, inline feel) */
+div:has(> h2) form {
+  width: 100%;
+  margin-top: .7rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .5rem .6rem;
+  align-items: center;
+}
+
+div:has(> h2) form input[type="text"],
+div:has(> h2) form input[type="number"],
+div:has(> h2) form input[type="date"] {
+  padding: .45rem .6rem;
+  border-radius: 8px;
+  border: 1px solid rgba(11,57,65,0.06);
+  background: #ffffff;
+  font-size: .92rem;
+}
+
+div:has(> h2) form button {
+  padding: .45rem .85rem;
+  border-radius: 8px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+}
+
+@media (max-width: 560px) {
+  #root > form { grid-template-columns: 1fr; }
+  div:has(> h2) form { grid-template-columns: 1fr; }
+  div:has(> h2) form button { width: 100%; }
+}
+
+/* Global fixes to prevent horizontal scrolling and ensure consistent sizing */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+
+/* Ensure forms never exceed the viewport width */
+#root > form, div:has(> h2) form { max-width: calc(100% - 2rem); }
+
+/* Accent stripe for the add-book form to make it more prominent */
+#root > form {
+  border-left: 4px solid rgba(66,165,245,0.9);
+  padding-left: .75rem; /* slightly reduce left padding to account for stripe */
+}
+
+/* Make inputs fill their grid cells and align checkbox nicely */
+#root > form input[type="text"],
+#root > form input[type="number"],
+#root > form input[type="date"] {
+  width: 100%;
+}
+
+#root > form input[type="checkbox"] {
+  grid-column: 1 / 2; /* place check in the first column */
+  justify-self: start;
+  margin-left: 0.2rem;
+  transform: scale(1.12);
+  align-self: center;
+}
+#root > form input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66,165,245,0.12);
+}
+
+/* Make the Add button stand out (but keep overall light look) */
+#root > form button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: .65rem 1.15rem;
+  background: linear-gradient(90deg, rgba(6,182,212,1), rgba(66,165,245,1));
+  box-shadow: 0 8px 20px rgba(6,182,212,0.08);
+}
+
+/* Update form: subtle divider and spacing to distinguish inline edit area */
+div:has(> h2) form {
+  border-top: 1px solid rgba(11,57,65,0.04);
+  padding-top: .6rem;
+  gap: .45rem .6rem;
+}
+
+@media (max-width: 560px) {
+  #root > form { border-left-width: 3px; padding-left: .6rem }
+}
